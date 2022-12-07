@@ -1,0 +1,80 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --hue: 200;
+  --saturation: 50%; 
+  --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+  --background-color: hsl(var(--hue), var(--saturation), 20%);
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+.paddle {
+
+  --position: 50;
+  position: absolute;
+  background-color: var(--foreground-color);
+  width: 1vh;
+  height: 10vh;
+  top: calc(var(--position) * 1vh);
+  /* utiliza la variable position y lo multiplica por el 1vh, para llevar a cabo esa multiplicacion se utiliza calc() */
+  transform: translateY(-50%)
+  /* lo devuelve hacia arriba el 50% de su propia altura */
+}
+
+
+.paddle.left {
+  left: 1vw; /* 1% de la pantalla */
+}
+
+.paddle.right {
+  right:  1vw;
+}
+
+.ball {
+
+  --x: 50;
+  --y: 50; 
+
+  position: absolute;
+  background-color: var(--foreground-color);
+  width: 2.5vh;
+  height: 2.5vh;
+  left: calc(var(--x) * 1vw);
+  top: calc(var(--y) * 1vh);
+  
+  transform: translateY(-50%, -50%);
+  border-radius: 50%;
+  
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 7vh;
+  color: var(--foreground-color);
+}
+
+.score > * { /* esto aplica a todos los hijos directos. esto divide la pantalla a la mitad y pone a cada uno donde empieza su mitad */
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0 2vh;
+  margin: 1vh 0;
+  opacity: .5;
+}
+
+.score > :first-child { /*se elige el primer child y se aliea el texto hacia la derecha*/
+  text-align: right;
+  border-right: .5vh solid var(--foreground-color);
+  /* se agrega el borde derecho al primer child para crear la separacion */
+}
+
+
+
